@@ -1,0 +1,81 @@
+# -----------------------------------------------------------------------------
+# 1. THE "ANTI-CRASH" SECTION (IDE & OS)
+# -----------------------------------------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.history
+.DS_Store
+Thumbs.db
+*.swp
+desktop.ini
+
+# -----------------------------------------------------------------------------
+# 2. FLUTTER & DART INTERNALS (The "Build" Section)
+# -----------------------------------------------------------------------------
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-preload-cache/
+.pub/
+build/
+bin/cache/
+
+# Generated files that should stay local
+**/generated_plugin_registrant.dart
+**/generated_plugins.cmake
+
+# -----------------------------------------------------------------------------
+# 3. ANDROID (The "Path Conflict" Fixer)
+# -----------------------------------------------------------------------------
+**/android/.gradle/
+**/android/local.properties
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/**/gradle-wrapper.jar
+**/android/**/GeneratedPluginRegistrant.java
+
+# Security: Never commit keys or passwords
+*.jks
+*.keystore
+**/android/key.properties
+
+# -----------------------------------------------------------------------------
+# 4. IOS & MACOS (XCode Conflict Prevention)
+# -----------------------------------------------------------------------------
+**/ios/.generated/
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+
+# XCode User Settings (This is what usually crashes Mac users)
+**/ios/**/xcuserdata/
+**/ios/**/DerivedData/
+**/ios/**/Pods/
+**/ios/**/.symlinks/
+
+# macOS Desktop
+**/macos/Flutter/ephemeral/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+
+# -----------------------------------------------------------------------------
+# 5. MISC & ENVIRONMENT
+# -----------------------------------------------------------------------------
+.env*
+*.log
+coverage/
+app.*.symbols
+app.*.map.json
