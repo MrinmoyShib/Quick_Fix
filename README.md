@@ -1,16 +1,31 @@
-# quick_fix
+# Quick-Fix: Smart Maintenance Request System 🛠️
 
-Quick-Fix is a streamlined maintenance ticketing app that allows users to report household issues and track their progress from "Pending" to "Fixed" in real-time.
+**Quick-Fix** is a mobile application built with **Flutter** designed to modernize maintenance reporting in university dorms, halls, and hostels. It replaces slow, manual processes with a transparent, digital ticketing system.
 
-## Getting Started
+## 👥 The Team
+- **Shirsha Chowdhury**
+- **Mrinmoy Shib**
+- **Naimul Islam Jehan**
 
-This project is a starting point for a Flutter application.
+## 🎯 The Vision
+Our goal is to bridge the "maintenance gap" for students living in shared accommodations. While we are starting with university dorms, the architecture of **Quick-Fix** is designed to scale for public use, allowing any property management company or hostel provider to manage their facilities efficiently.
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Core Features
+- **Secure Access:** User authorization for personalized request tracking.
+- **Categorized Inputs:** Specific reporting for **Electric**, **Plumbing**, and **Furniture** issues.
+- **Real-Time Status:** Track requests through three stages: `Pending`, `In Progress`, and `Fixed`.
+- **Request History:** A dedicated "My Requests" page to view all past records.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠️ Tech Stack
+- **Frontend:** Flutter & Dart
+- **UI:** Material Design 3
+- **State Management:** Provider / setState
+- **Local Storage:** (Planned: Hive/Sqflite for persistence)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Getting Started
+1. **Clone the repo:** `git clone https://github.com/[YOUR_USERNAME]/quick_fix_app.git`
+2. **Install dependencies:** `flutter pub get`
+3. **Run the app:** `flutter run`
+
+---
+*Developed as part of the Software Development Course (Semester 2.1)*
