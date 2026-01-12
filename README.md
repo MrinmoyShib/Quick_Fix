@@ -3,9 +3,10 @@
 **Quick-Fix** is a mobile application built with **Flutter** designed to modernize maintenance reporting in university dorms, halls, and hostels. It replaces slow, manual processes with a transparent, digital ticketing system.
 
 ## 👥 The Team
-- **Shirsha Chowdhury**
-- **Mrinmoy Shib**
-- **Naimul Islam Jehan**
+
+> **Mrinmoy Shib** — [@MrinmoyShib](https://github.com/MrinmoyShib)  
+> **Shirsha Chowdhury** — [@Aragon-07](https://github.com/Aragon-07)  
+> **Naimul Islam Jehan** — [@naimul](https://github.com/naimul-username)
 
 ## 🎯 The Vision
 Our goal is to bridge the "maintenance gap" for students living in shared accommodations. While we are starting with university dorms, the architecture of **Quick-Fix** is designed to scale for public use, allowing any property management company or hostel provider to manage their facilities efficiently.
