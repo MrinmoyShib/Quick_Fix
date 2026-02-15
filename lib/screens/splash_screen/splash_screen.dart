@@ -45,12 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Use this to see the invisible edges of your logo file
-              // Wrap the Image in Padding to counteract the uneven empty space in the file
               Padding(
                 padding: const EdgeInsets.only(
-                  top: 40.0,    // Pushes the ring down
-                  left: 25.0,  // Pushes the ring to the left (by adding space on the right)
+                  top: 40.0,
+                  left: 25.0,
                 ),
                 child: Image.asset(
                   'assets/images/logo.png',
@@ -59,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
               const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(right: 2.0), // Offsets the letterSpacing at the end
+                padding: const EdgeInsets.only(right: 2.0),
                 child: const Text(
                   "QUICK-FIX",
                   style: TextStyle(
