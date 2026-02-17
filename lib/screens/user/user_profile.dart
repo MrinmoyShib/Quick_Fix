@@ -6,55 +6,109 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold removed to integrate seamlessly with the BottomNavigationBar in UserHome
     return Column(
       children: [
-        const SizedBox(height: 40),
+        // --- 1. THE PROFILE HEADER CARD ---
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.blue[800]!, Colors.blue[600]!],
+            ),
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blue.withOpacity(0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              )
+            ],
+          ),
+          padding: const EdgeInsets.only(top: 50, bottom: 30),
+          child: Column(
+            children: [
+              const CircleAvatar(
+                radius: 55,
+                backgroundColor: Colors.white,
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.blue,
+                  child: Icon(Icons.person, size: 55, color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 15),
+              const Text(
+                "Shirsha",
+                style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
+                ),
+              ),
+              const Text(
+                "shirsha@student.com",
+                style: TextStyle(color: Colors.white70, fontSize: 16),
+              ),
 
-        // Profile Header
-        const Center(
-          child: CircleAvatar(
-            radius: 60,
-            backgroundColor: Colors.blue,
-            child: Icon(Icons.person, size: 60, color: Colors.white),
+              const SizedBox(height: 25),
+
+              // --- 2. THE STATISTICS ROW (Matched to your Request History) ---
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _statItem("Total", "03"),
+                    _divider(),
+                    _statItem("Pending", "01"),
+                    _divider(),
+                    _statItem("In Progress", "01"),
+                    _divider(),
+                    _statItem("Fixed", "01"),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 15),
-        const Text(
-          "Shirsha",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
-        ),
-        const Text(
-          "shirsha@student.com",
-          style: TextStyle(color: Colors.grey, fontSize: 16),
-        ),
 
-        const SizedBox(height: 40),
-        const Divider(indent: 20, endIndent: 20),
+        const SizedBox(height: 20),
 
-        // Profile Options
+        // --- 3. PROFILE OPTIONS LIST ---
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             children: [
-              _profileOption(Icons.settings, "Account Settings"),
-              _profileOption(Icons.notifications, "Notifications"),
-              _profileOption(Icons.help_outline, "Help & Support"),
+              _profileOption(Icons.settings, "Account Settings", Colors.orange),
+              _profileOption(Icons.notifications, "Notifications", Colors.blue),
+              _profileOption(Icons.help_outline, "Help & Support", Colors.green),
+              _profileOption(Icons.security, "Privacy Policy", Colors.purple),
 
               const SizedBox(height: 30),
 
-              // Logout Button - Handles Authorization Requirement
+              // Logout Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: OutlinedButton.icon(
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.red,
-                    side: const BorderSide(color: Colors.red),
+                    side: const BorderSide(color: Colors.red, width: 1.5),
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)
+                    ),
                   ),
                   onPressed: () {
-                    // Clears the stack and returns to Splash for security
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => const SplashScreen()),
@@ -62,9 +116,13 @@ class UserProfile extends StatelessWidget {
                     );
                   },
                   icon: const Icon(Icons.logout),
-                  label: const Text("Logout", style: TextStyle(fontWeight: FontWeight.bold)),
+                  label: const Text(
+                      "Logout",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
+                  ),
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -72,19 +130,54 @@ class UserProfile extends StatelessWidget {
     );
   }
 
-  Widget _profileOption(IconData icon, String title) {
-    return ListTile(
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Colors.blue[50],
-          borderRadius: BorderRadius.circular(8),
+  // Helper for Statistic Items
+  Widget _statItem(String label, String value) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold
+          ),
         ),
-        child: Icon(icon, color: Colors.blue[800]),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 11),
+        ),
+      ],
+    );
+  }
+
+  // Vertical Divider for Stats
+  Widget _divider() {
+    return Container(height: 30, width: 1, color: Colors.white24);
+  }
+
+  // Refined Profile Option Helper
+  Widget _profileOption(IconData icon, String title, Color color) {
+    return Card(
+      elevation: 0,
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      color: Colors.grey[50],
+      child: ListTile(
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(icon, color: color, size: 22),
+        ),
+        title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)
+        ),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+        onTap: () {},
       ),
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-      onTap: () {},
     );
   }
 }
