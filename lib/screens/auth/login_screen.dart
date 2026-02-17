@@ -14,12 +14,11 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      // 1. The Body: Holds Email, Password, and Login Button (Centered)
       body: Form(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Keeps form in the center
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
                 decoration: const InputDecoration(
@@ -65,11 +64,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
+                    // shape: RoundedRectangleBorder(
+                    //   borderRadius: BorderRadius.circular(20),
+                    // ),
+                    side: const BorderSide(
+                      color: Colors.blueAccent,
+                      width: 2,
+                    ),
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () {
-                    // Login logic
+
                   },
                 ),
               ),
@@ -81,7 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
 
-      // 2. The Bottom Bar: Holds the Sign Up Button (Stuck to bottom)
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SizedBox(
@@ -96,12 +101,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
+              // shape: RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.circular(20),
+              // ),
               side: const BorderSide(
                 color: Colors.grey,
-                width: 1,
+                width: 2,
               ),
               backgroundColor: Colors.white,
               foregroundColor: Colors.blue,
