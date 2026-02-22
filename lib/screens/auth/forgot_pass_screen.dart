@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class ForgotPassScreen extends StatefulWidget {
+  const ForgotPassScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<ForgotPassScreen> createState() => _ForgotPassScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _ForgotPassScreenState extends State<ForgotPassScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,25 +28,6 @@ class _SignupScreenState extends State<SignupScreen> {
                     borderSide: BorderSide(color: Colors.blue),
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
-                  hintText: "Mobile Number",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.phone,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.grey),
                   prefixIcon: Icon(
@@ -55,7 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-               SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -99,7 +80,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   child: const Text(
-                    "Sign Up",
+                    "Change Password",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
