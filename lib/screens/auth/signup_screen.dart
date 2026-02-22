@@ -18,6 +18,10 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: 300,
+              ),
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(

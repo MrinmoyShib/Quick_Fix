@@ -23,6 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: 300,
+              ),
               TextFormField(
                 decoration: const InputDecoration(
 
@@ -34,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderSide: BorderSide(color: Colors.blue),
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
-                  hintText: "Email",
+                  hintText: "Email or Username",
                   hintStyle: TextStyle(color: Colors.grey),
                   prefixIcon: Icon(Icons.email, color: Colors.blue),
                 ),
