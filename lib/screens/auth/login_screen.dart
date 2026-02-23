@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quick_fix/screens/admin/admin_dashboard.dart';
 import 'package:quick_fix/screens/auth/forgot_pass_screen.dart';
 import 'package:quick_fix/screens/auth/signup_screen.dart';
+import 'package:quick_fix/screens/user/user_home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,6 +13,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isHovering = false;
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 30),
               TextFormField(
+                controller: _emailController,
                 decoration: const InputDecoration(
 
                   enabledBorder: OutlineInputBorder(
@@ -47,6 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
 
               TextFormField(
+                controller: _passwordController,
                 decoration: const InputDecoration(
 
                   enabledBorder: OutlineInputBorder(
@@ -70,9 +79,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton(
 
                   style: ElevatedButton.styleFrom(
-                    // shape: RoundedRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(20),
-                    // ),
+
+
                     side: const BorderSide(
                       color: Colors.blueAccent,
                       width: 2,
@@ -82,6 +90,42 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
 
                   onPressed: () {
+                    String email = _emailController.text;
+                    String password = _passwordController.text;
+
+                    if(email == 'user@gmail.com' && password == 'user'){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const UserHome()),
+                      );
+                    }
+                    else if(email == 'user' && password == 'user'){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const UserHome()),
+                      );
+                    }
+                    else if(email == 'admin' && password == 'admin'){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AdminDashboard()),
+                      );
+                    }
+                    else if(email == 'admin@gmail.com' && password == 'admin'){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AdminDashboard()),
+                      );
+                    }
+                    else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Invalid credentials'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+
 
                   },
                   child: const Text(
