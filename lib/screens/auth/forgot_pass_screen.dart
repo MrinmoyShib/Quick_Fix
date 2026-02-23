@@ -18,10 +18,10 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/logo.png',
-                width: 300,
-              ),
+              // Image.asset(
+              //   'assets/images/logo.png',
+              //   width: 300,
+              // ),
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(

@@ -21,12 +21,13 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Spacer(flex: 2),
               Image.asset(
                 'assets/images/logo.png',
-                width: 300,
+                width: 100,
               ),
+              const SizedBox(height: 30),
               TextFormField(
                 decoration: const InputDecoration(
 
@@ -115,8 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              )
-
+              ),
+              const Spacer(flex: 3),
             ],
           ),
         ),
