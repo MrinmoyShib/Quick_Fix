@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: Center(
         child: TweenAnimationBuilder(
           duration: const Duration(milliseconds: 2000),
@@ -52,14 +52,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 child: Image.asset(
                   'assets/images/logo.png',
-                  width: 300,
+                  width: 200,
                 ),
               ),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(right: 2.0),
                 child: const Text(
-                  "QUICK-FIX",
+                  "Quick-Fix",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 28,

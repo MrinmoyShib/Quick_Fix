@@ -3,12 +3,10 @@ import 'admin_history.dart';
 import 'admin_profile.dart';
 import 'technician_list.dart';
 import 'request_details.dart';
+import 'app_colors.dart';
 
 class AdminDashboard extends StatelessWidget {
   const AdminDashboard({super.key});
-
-  static const Color darkPurple = Color(0xFF2E1065);
-  static const Color lightPurple = Color(0xFF8B5CF6);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,7 @@ class AdminDashboard extends StatelessWidget {
                   children: [
                     _buildStat("Active", "4", Icons.bolt, Colors.amber),
                     const SizedBox(width: 15),
-                    _buildStat("Closed", "7", Icons.check_circle, lightPurple),
+                    _buildStat("Closed", "7", Icons.check_circle, AppColors.lightPurple),
                   ],
                 ),
                 const SizedBox(height: 30),
@@ -64,7 +62,7 @@ class AdminDashboard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(25, 60, 25, 30),
       decoration: const BoxDecoration(
-        gradient: LinearGradient(colors: [darkPurple, lightPurple]),
+        gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
       child: const Column(
@@ -116,7 +114,7 @@ class AdminDashboard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 30, color: lightPurple),
+            Icon(icon, size: 30, color: AppColors.lightPurple),
             const SizedBox(height: 8),
             Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             Text(sub, textAlign: TextAlign.center, style: const TextStyle(color: Colors.grey, fontSize: 10)),

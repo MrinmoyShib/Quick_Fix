@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
 
 class RequestDetails extends StatelessWidget {
   const RequestDetails({super.key});
-
-  final Color primaryColor = const Color(0xFF8B5CF6);
-  final Color darkColor = const Color(0xFF2E1065);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class RequestDetails extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(15, 60, 25, 30),
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [darkColor, primaryColor]),
+        gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
       child: Row(
@@ -74,7 +72,7 @@ class RequestDetails extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(id, style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold)),
+              Text(id, style: TextStyle(color: AppColors.lightPurple, fontWeight: FontWeight.bold)),
               _buildBadge(cat),
             ],
           ),
@@ -108,7 +106,7 @@ class RequestDetails extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start, // Aligns icon to top if text wraps
         children: [
-          Icon(icon, size: 16, color: primaryColor),
+          Icon(icon, size: 16, color: AppColors.lightPurple),
           const SizedBox(width: 8),
           // We wrap the text in Expanded to stop the "Yellow Stripe" error
           Expanded(
@@ -126,8 +124,8 @@ class RequestDetails extends StatelessWidget {
   Widget _buildBadge(String label) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: primaryColor.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-      child: Text(label, style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold, fontSize: 10)),
+      decoration: BoxDecoration(color: AppColors.lightPurple.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+      child: Text(label, style: TextStyle(color: AppColors.lightPurple, fontWeight: FontWeight.bold, fontSize: 10)),
     );
   }
 

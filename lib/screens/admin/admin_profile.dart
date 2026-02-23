@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
 
 class AdminProfile extends StatelessWidget {
   const AdminProfile({super.key});
 
-  final Color adminAccent = const Color(0xFF2E1065); // Midnight Purple
-  final Color adminPrimary = const Color(0xFF8B5CF6); // Electric Violet
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class AdminProfile extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.only(top: 60, bottom: 30),
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [adminAccent, adminPrimary]),
+        gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
       child: Column(
@@ -60,7 +59,7 @@ class AdminProfile extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)]),
       child: TextField(
         controller: TextEditingController(text: val),
-        decoration: InputDecoration(labelText: label, prefixIcon: Icon(icon, color: adminPrimary), border: InputBorder.none, contentPadding: const EdgeInsets.all(15)),
+        decoration: InputDecoration(labelText: label, prefixIcon: Icon(icon, color: AppColors.lightPurple), border: InputBorder.none, contentPadding: const EdgeInsets.all(15)),
       ),
     );
   }
@@ -70,7 +69,7 @@ class AdminProfile extends StatelessWidget {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(backgroundColor: adminPrimary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+        style: ElevatedButton.styleFrom(backgroundColor: AppColors.lightPurple, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
         onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Profile Updated"))),
         child: const Text("Save Changes", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),

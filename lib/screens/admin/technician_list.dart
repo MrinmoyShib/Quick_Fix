@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
 
 class TechnicianList extends StatelessWidget {
   const TechnicianList({super.key});
 
-  final Color adminAccent = const Color(0xFF2E1065); // Midnight Purple
-  final Color adminPrimary = const Color(0xFF8B5CF6); // Electric Violet
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class TechnicianList extends StatelessWidget {
   Widget _header(BuildContext ctx) => Container(
     padding: const EdgeInsets.fromLTRB(10, 60, 20, 30),
     decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [adminAccent, adminPrimary]),
+        gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30))),
     child: Column(children: [
       Row(children: [
@@ -62,7 +61,7 @@ class TechnicianList extends StatelessWidget {
           border: isFree ? Border.all(color: col.withOpacity(0.3)) : null,
           boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 5))]),
       child: Row(children: [
-        CircleAvatar(backgroundColor: adminPrimary.withOpacity(0.1), child: Icon(Icons.person, color: adminPrimary)),
+        CircleAvatar(backgroundColor: AppColors.lightPurple.withOpacity(0.1), child: Icon(Icons.person, color: AppColors.lightPurple)),
         const SizedBox(width: 15),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
