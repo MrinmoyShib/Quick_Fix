@@ -20,8 +20,46 @@ class _SignupScreenState extends State<SignupScreen> {
             children: [
               // Image.asset(
               //   'assets/images/logo.png',
-              //   width: 300,
+              //   width: 100,
               // ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                  hintText: "Email",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                  hintText: "Username",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -41,25 +79,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Email",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.email,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-               SizedBox(height: 20),
+
+
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
