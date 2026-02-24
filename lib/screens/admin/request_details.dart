@@ -104,16 +104,16 @@ class RequestDetails extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start, // Aligns icon to top if text wraps
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, size: 16, color: AppColors.lightPurple),
           const SizedBox(width: 8),
-          // We wrap the text in Expanded to stop the "Yellow Stripe" error
+
           Expanded(
             child: Text(
               text,
               style: const TextStyle(color: Colors.blueGrey, fontSize: 13),
-              softWrap: true, // This allows the text to go to the next line
+              softWrap: true, 
             ),
           ),
         ],
