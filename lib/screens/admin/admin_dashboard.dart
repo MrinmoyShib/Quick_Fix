@@ -17,7 +17,7 @@ class AdminDashboard extends StatelessWidget {
         children: [
           _buildHeader(),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -40,7 +40,7 @@ class AdminDashboard extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,  
+                  mainAxisSpacing: 20,
                   childAspectRatio: 1.1,
                   children: [
                     _buildCard(context, "Requests", "Manage Tickets", Icons.assignment_late, const RequestDetails()),
