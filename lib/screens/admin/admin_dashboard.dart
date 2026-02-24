@@ -66,7 +66,7 @@ class AdminDashboard extends StatelessWidget {
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
       child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text("Quick Fix", style: TextStyle(color: Colors.white70, fontSize: 14)),
           Text("Admin Console", style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold)),
