@@ -89,7 +89,7 @@ class AdminHistory extends StatelessWidget {
           Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const Divider(height: 25),
 
-          // --- FIXED: Wrapped in Row + Expanded to handle long text ---
+          
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
