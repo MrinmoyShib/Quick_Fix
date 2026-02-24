@@ -52,7 +52,6 @@ class AdminProfile extends StatelessWidget {
     );
   }
 
-  // REUSABLE FIELD: This is the "Smart" way to code
   Widget _field(String label, String val, IconData icon) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),

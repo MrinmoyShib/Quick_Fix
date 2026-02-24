@@ -10,7 +10,6 @@ class AdminHistory extends StatelessWidget {
       backgroundColor: const Color(0xFFF5F5F5),
       body: Column(
         children: [
-          // --- HEADER SECTION ---
           Container(
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(15, 60, 25, 30),
@@ -35,7 +34,6 @@ class AdminHistory extends StatelessWidget {
             ),
           ),
 
-          // --- LIST OF CARDS ---
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
@@ -57,7 +55,6 @@ class AdminHistory extends StatelessWidget {
     );
   }
 
-  // --- REUSABLE CARD DESIGN ---
   Widget _simpleCard(String id, String cat, String title, String name, String addr, String desc, String status) {
     Color statusColor = Colors.orange;
     IconData statusIcon = Icons.sync;

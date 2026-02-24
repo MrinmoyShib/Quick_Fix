@@ -99,7 +99,7 @@ class RequestDetails extends StatelessWidget {
     );
   }
 
-  // --- THE FIX IS IN THIS FUNCTION ---
+
   Widget _iconLine(IconData icon, String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
