@@ -39,8 +39,8 @@ class AdminDashboard extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
-                  crossAxisSpacing: 20, // Updated to 20 for 1-to-1 match
-                  mainAxisSpacing: 20,  // Updated to 20 for 1-to-1 match
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,  
                   childAspectRatio: 1.1,
                   children: [
                     _buildCard(context, "Requests", "Manage Tickets", Icons.assignment_late, const RequestDetails()),
