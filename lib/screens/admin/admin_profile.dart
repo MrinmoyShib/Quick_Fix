@@ -14,7 +14,7 @@ class AdminProfile extends StatelessWidget {
           children: [
             _buildHeader(context),
             Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.all(25),
               child: Column(
                 children: [
                   _field("Full Name", "Mrinmoy", Icons.person),
