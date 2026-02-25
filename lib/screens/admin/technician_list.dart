@@ -11,17 +11,20 @@ class TechnicianList extends StatelessWidget {
       backgroundColor: Colors.grey[50],
       body: Column(
         children: [
-          _header(context),
+          _buildheader(context),
           Expanded(
-            child: ListView(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
-              children: [
-                _techCard("Steve Rogers", "Electrician", "Available", null, Colors.green),
-                _techCard("Peter Parker", "Plumber", "Busy", "Order #QF-8821", Colors.orange),
-                _techCard("Clark Kent", "Electrician", "Busy", "Order #QF-8750", Colors.orange),
-                _techCard("Tony Stark", "AC Specialist", "Busy", "Order #QF-8910", Colors.orange),
-                _techCard("Bruce Wayne", "General Repair", "Busy", "Order #QF-8800", Colors.orange),
-              ],
+              child: Column(
+                children: [
+                  _techCard("Steve Rogers", "Electrician", "Available", null, Colors.green),
+                  _techCard("Peter Parker", "Plumber", "Busy", "Order #QF-8821", Colors.orange),
+                  _techCard("Clark Kent", "Electrician", "Busy", "Order #QF-8750", Colors.orange),
+                  _techCard("Tony Stark", "AC Specialist", "Busy", "Order #QF-8910", Colors.orange),
+                  _techCard("Bruce Wayne", "General Repair", "Busy", "Order #QF-8800", Colors.orange),
+                ],
+              ),
+
             ),
           ),
         ],
@@ -29,27 +32,31 @@ class TechnicianList extends StatelessWidget {
     );
   }
 
-  Widget _header(BuildContext ctx) => Container(
-    padding: const EdgeInsets.fromLTRB(10, 60, 20, 30),
-    decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30))),
-    child: Column(children: [
-      Row(children: [
-        IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(ctx)),
-        const Text("Staff Management", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+  Widget _buildheader(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 60, 20, 30),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
+          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30))),
+      child: Column(children: [
+        Row(children: [
+          IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
+          const Text("Staff Management", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+        ]),
+        const SizedBox(height: 20),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          _sumItem("5", "Total Staff"), _sumItem("1", "Available"), _sumItem("4", "On Task"),
+        ]),
       ]),
-      const SizedBox(height: 20),
-      Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        _sumItem("5", "Total Staff"), _sumItem("1", "Available"), _sumItem("4", "On Task"),
-      ]),
-    ]),
-  );
+    );
+  }
 
-  Widget _sumItem(String count, String label) => Column(children: [
-    Text(count, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-    Text(label, style: const TextStyle(color: Colors.white70, fontSize: 12)),
-  ]);
+  Widget _sumItem(String count, String label) {
+    return Column(children: [
+      Text(count, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+      Text(label, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+    ]);
+  }
 
   Widget _techCard(String name, String role, String status, String? order, Color col) {
     bool isFree = status == "Available";
@@ -59,7 +66,7 @@ class TechnicianList extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(20),
           border: isFree ? Border.all(color: col.withOpacity(0.3)) : null,
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 5))]),
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10)]),
       child: Row(children: [
         CircleAvatar(backgroundColor: AppColors.lightPurple.withOpacity(0.1), child: Icon(Icons.person, color: AppColors.lightPurple)),
         const SizedBox(width: 15),

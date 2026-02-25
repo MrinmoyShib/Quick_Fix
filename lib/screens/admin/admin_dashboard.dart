@@ -17,7 +17,7 @@ class AdminDashboard extends StatelessWidget {
         children: [
           _buildHeader(),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,8 +39,8 @@ class AdminDashboard extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
-                  crossAxisSpacing: 20, // Updated to 20 for 1-to-1 match
-                  mainAxisSpacing: 20,  // Updated to 20 for 1-to-1 match
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
                   childAspectRatio: 1.1,
                   children: [
                     _buildCard(context, "Requests", "Manage Tickets", Icons.assignment_late, const RequestDetails()),
@@ -66,7 +66,7 @@ class AdminDashboard extends StatelessWidget {
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
       child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text("Quick Fix", style: TextStyle(color: Colors.white70, fontSize: 14)),
           Text("Admin Console", style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold)),

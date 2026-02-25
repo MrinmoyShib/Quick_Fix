@@ -63,7 +63,7 @@ class RequestDetails extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 15, offset: const Offset(0, 8)),
+          BoxShadow(color: Colors.black.withOpacity( 0.03), blurRadius: 15),
         ],
       ),
       child: Column(
@@ -89,9 +89,9 @@ class RequestDetails extends StatelessWidget {
 
           Row(
             children: [
-              Expanded(child: _btn("Reject", Colors.redAccent, false)),
+              Expanded(child: _btn("Reject", Colors.red)),
               const SizedBox(width: 12),
-              Expanded(child: _btn("Approve", Colors.green, true)),
+              Expanded(child: _btn("Approve", Colors.green,)),
             ],
           ),
         ],
@@ -99,21 +99,21 @@ class RequestDetails extends StatelessWidget {
     );
   }
 
-  // --- THE FIX IS IN THIS FUNCTION ---
+
   Widget _iconLine(IconData icon, String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start, // Aligns icon to top if text wraps
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, size: 16, color: AppColors.lightPurple),
           const SizedBox(width: 8),
-          // We wrap the text in Expanded to stop the "Yellow Stripe" error
+
           Expanded(
             child: Text(
               text,
               style: const TextStyle(color: Colors.blueGrey, fontSize: 13),
-              softWrap: true, // This allows the text to go to the next line
+              softWrap: true, 
             ),
           ),
         ],
@@ -124,21 +124,21 @@ class RequestDetails extends StatelessWidget {
   Widget _buildBadge(String label) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: AppColors.lightPurple.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(color: AppColors.lightPurple.withOpacity(0.03), borderRadius: BorderRadius.circular(10)),
       child: Text(label, style: TextStyle(color: AppColors.lightPurple, fontWeight: FontWeight.bold, fontSize: 10)),
     );
   }
 
-  Widget _btn(String label, Color col, bool isFilled) {
+  Widget _btn(String label, Color col) {
     return Container(
       height: 40,
       decoration: BoxDecoration(
-        color: isFilled ? col : Colors.white,
+        color: col,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: col),
       ),
       child: Center(
-        child: Text(label, style: TextStyle(color: isFilled ? Colors.white : col, fontWeight: FontWeight.bold)),
+        child: Text(label, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
   }

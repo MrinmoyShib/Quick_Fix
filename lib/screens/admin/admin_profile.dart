@@ -14,7 +14,7 @@ class AdminProfile extends StatelessWidget {
           children: [
             _buildHeader(context),
             Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.all(25),
               child: Column(
                 children: [
                   _field("Full Name", "Mrinmoy", Icons.person),
@@ -52,7 +52,6 @@ class AdminProfile extends StatelessWidget {
     );
   }
 
-  // REUSABLE FIELD: This is the "Smart" way to code
   Widget _field(String label, String val, IconData icon) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
