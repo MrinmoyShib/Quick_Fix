@@ -32,27 +32,31 @@ class TechnicianList extends StatelessWidget {
     );
   }
 
-  Widget _buildheader(BuildContext context) => Container(
-    padding: const EdgeInsets.fromLTRB(10, 60, 20, 30),
-    decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30))),
-    child: Column(children: [
-      Row(children: [
-        IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
-        const Text("Staff Management", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+  Widget _buildheader(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 60, 20, 30),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
+          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30))),
+      child: Column(children: [
+        Row(children: [
+          IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
+          const Text("Staff Management", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+        ]),
+        const SizedBox(height: 20),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          _sumItem("5", "Total Staff"), _sumItem("1", "Available"), _sumItem("4", "On Task"),
+        ]),
       ]),
-      const SizedBox(height: 20),
-      Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        _sumItem("5", "Total Staff"), _sumItem("1", "Available"), _sumItem("4", "On Task"),
-      ]),
-    ]),
-  );
+    );
+  }
 
-  Widget _sumItem(String count, String label) => Column(children: [
-    Text(count, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-    Text(label, style: const TextStyle(color: Colors.white70, fontSize: 12)),
-  ]);
+  Widget _sumItem(String count, String label) {
+    return Column(children: [
+      Text(count, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+      Text(label, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+    ]);
+  }
 
   Widget _techCard(String name, String role, String status, String? order, Color col) {
     bool isFree = status == "Available";
