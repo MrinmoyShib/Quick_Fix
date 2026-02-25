@@ -18,10 +18,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Image.asset(
-              //   'assets/images/logo.png',
-              //   width: 300,
-              // ),
+
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -42,6 +39,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                obscureText: true,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey),
@@ -61,7 +59,9 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                obscureText: true,
                 decoration: const InputDecoration(
+
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey),
                     borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -80,9 +80,11 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
               ),
               const SizedBox(height: 20),
               SizedBox(
-                height: 35,
+                height: 40,
                 width: double.infinity,
+
                 child: ElevatedButton(
+
                   child: const Text(
                     "Change Password",
                     style: TextStyle(

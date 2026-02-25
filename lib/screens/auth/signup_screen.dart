@@ -18,10 +18,7 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Image.asset(
-              //   'assets/images/logo.png',
-              //   width: 100,
-              // ),
+
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -40,7 +37,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -59,7 +56,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -78,10 +75,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
 
               TextFormField(
+                obscureText: true,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey),
@@ -101,6 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                obscureText: true,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey),

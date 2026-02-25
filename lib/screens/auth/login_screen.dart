@@ -56,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               TextFormField(
                 controller: _passwordController,
+                obscureText: true,
                 decoration: const InputDecoration(
 
                   enabledBorder: OutlineInputBorder(
@@ -175,9 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: ElevatedButton(
 
             style: ElevatedButton.styleFrom(
-              // shape: RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.circular(20),
-              // ),
+
               side: const BorderSide(
                 color: Colors.grey,
                 width: 2,
