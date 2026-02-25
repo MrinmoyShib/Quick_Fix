@@ -59,7 +59,6 @@ class AdminHistory extends StatelessWidget {
   }
 
   Widget _buildHistoryCard(BuildContext context, String id, String cat, String title, String user, String addr, String desc, String status) {
-    // Logic for status styling
     Color statusColor = Colors.orange;
     IconData statusIcon = Icons.sync;
 
