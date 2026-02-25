@@ -11,17 +11,20 @@ class TechnicianList extends StatelessWidget {
       backgroundColor: Colors.grey[50],
       body: Column(
         children: [
-          _header(context),
+          _buildheader(context),
           Expanded(
-            child: ListView(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
-              children: [
-                _techCard("Steve Rogers", "Electrician", "Available", null, Colors.green),
-                _techCard("Peter Parker", "Plumber", "Busy", "Order #QF-8821", Colors.orange),
-                _techCard("Clark Kent", "Electrician", "Busy", "Order #QF-8750", Colors.orange),
-                _techCard("Tony Stark", "AC Specialist", "Busy", "Order #QF-8910", Colors.orange),
-                _techCard("Bruce Wayne", "General Repair", "Busy", "Order #QF-8800", Colors.orange),
-              ],
+              child: Column(
+                children: [
+                  _techCard("Steve Rogers", "Electrician", "Available", null, Colors.green),
+                  _techCard("Peter Parker", "Plumber", "Busy", "Order #QF-8821", Colors.orange),
+                  _techCard("Clark Kent", "Electrician", "Busy", "Order #QF-8750", Colors.orange),
+                  _techCard("Tony Stark", "AC Specialist", "Busy", "Order #QF-8910", Colors.orange),
+                  _techCard("Bruce Wayne", "General Repair", "Busy", "Order #QF-8800", Colors.orange),
+                ],
+              ),
+
             ),
           ),
         ],
@@ -29,14 +32,14 @@ class TechnicianList extends StatelessWidget {
     );
   }
 
-  Widget _header(BuildContext ctx) => Container(
+  Widget _buildheader(BuildContext context) => Container(
     padding: const EdgeInsets.fromLTRB(10, 60, 20, 30),
     decoration: BoxDecoration(
         gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30))),
     child: Column(children: [
       Row(children: [
-        IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(ctx)),
+        IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
         const Text("Staff Management", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
       ]),
       const SizedBox(height: 20),
