@@ -103,20 +103,29 @@ class AdminDashboard extends StatelessWidget {
 
   Widget _buildCard(BuildContext context, String title, String sub, IconData icon, Widget page) {
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => page)),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return page;
+            },
+          ),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10)],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03),blurRadius: 10)],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 30, color: AppColors.lightPurple),
             const SizedBox(height: 8),
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            Text(title,style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             Text(sub, textAlign: TextAlign.center, style: const TextStyle(color: Colors.grey, fontSize: 10)),
           ],
         ),
