@@ -66,7 +66,7 @@ class TechnicianList extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(20),
           border: isFree ? Border.all(color: col.withOpacity(0.3)) : null,
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 5))]),
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10)]),
       child: Row(children: [
         CircleAvatar(backgroundColor: AppColors.lightPurple.withOpacity(0.1), child: Icon(Icons.person, color: AppColors.lightPurple)),
         const SizedBox(width: 15),
