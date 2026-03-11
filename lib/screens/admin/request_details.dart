@@ -1,8 +1,46 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
+import 'global_data.dart';
 
-class RequestDetails extends StatelessWidget {
+class RequestDetails extends StatefulWidget {
   const RequestDetails({super.key});
+  @override
+  State<RequestDetails> createState() => _RequestDetailsState();
+}
+
+class _RequestDetailsState extends State<RequestDetails> {
+  void handleAction(ServiceRequest request, bool approved) {
+    setState(() {
+      if (approved) {
+        var tech = techStaff.firstWhere(
+              (t) {
+            String role = t.role.toLowerCase();
+            String cat = request.category.toLowerCase();
+            // This checks if the words match (like Plumb in Plumber and Plumbing)
+            bool isMatch = cat.contains(role.substring(0, 5)) || role.contains(cat.substring(0, 5));
+            return isMatch && t.status == "Available";
+          },
+          orElse: () => Technician(name: "None", role: "", status: ""),
+        );
+
+        if (tech.name != "None") {
+          tech.status = "Busy";
+          tech.currentOrder = "Order #${request.id}";
+          request.status = "Ongoing";
+          request.assignedTech = tech.name;
+          historyLogs.insert(0, request);
+          pendingRequests.remove(request);
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Assigned to ${tech.name}")));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("No technician available!")));
+        }
+      } else {
+        request.status = "Cancelled";
+        historyLogs.insert(0, request);
+        pendingRequests.remove(request);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +50,12 @@ class RequestDetails extends StatelessWidget {
         children: [
           _buildHeader(context),
           Expanded(
-            child: SingleChildScrollView(
+            child: pendingRequests.isEmpty
+                ? const Center(child: Text("No new requests", style: TextStyle(color: Colors.grey)))
+                : ListView.builder(
               padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  _buildRequestCard(context, "QF-8859", "Electrician", "Short Circuit Fix", "Bruce Banner", "House No. 45, Road No. 12, Dhanmondi, Dhaka", "Main breaker keeps tripping."),
-                  _buildRequestCard(context, "QF-8860", "Plumbing", "Kitchen Sink Leak", "Diana Prince", "Plot No. 23, Sector 7, Nasirabad, Chattogram", "Pipe crack under the sink."),
-                  _buildRequestCard(context, "QF-8861", "Electrician", "Fan Installation", "Barry Allen", "Flat 5B, Building 12, Zindabazar, Sylhet", "Installing two ceiling fans."),
-                  _buildRequestCard(context, "QF-8862", "Electrician", "AC Repair", "Thor Odinson", "House No. 15, Road No. 4, Sector 3, Uttara, Dhaka", "AC not working."),
-                ],
-              ),
+              itemCount: pendingRequests.length,
+              itemBuilder: (context, index) => _buildRequestCard(pendingRequests[index]),
             ),
           ),
         ],
@@ -33,112 +67,80 @@ class RequestDetails extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(15, 60, 25, 30),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(colors: [AppColors.darkPurple, AppColors.lightPurple]),
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
       child: Row(
         children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
-            onPressed: () => Navigator.pop(context),
-          ),
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Management", style: TextStyle(color: Colors.white70, fontSize: 14)),
-              Text("New Requests", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
-            ],
-          ),
+          IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
+          const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text("Management", style: TextStyle(color: Colors.white70, fontSize: 14)),
+            Text("New Requests", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+          ]),
         ],
       ),
     );
   }
 
-  Widget _buildRequestCard(BuildContext context, String id, String cat, String title, String user, String addr, String desc) {
+  Widget _buildRequestCard(ServiceRequest req) {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity( 0.03), blurRadius: 15),
-        ],
-      ),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 15)]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(id, style: TextStyle(color: AppColors.lightPurple, fontWeight: FontWeight.bold)),
-              _buildBadge(cat),
-            ],
-          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(req.id, style: const TextStyle(color: AppColors.lightPurple, fontWeight: FontWeight.bold)),
+            _buildBadge(req.category),
+          ]),
           const SizedBox(height: 5),
-          Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(req.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const Divider(height: 25),
-
-          _iconLine(Icons.person_outline, "User: $user"),
-          _iconLine(Icons.location_on_outlined, "Location: $addr"),
-
+          _iconLine(Icons.person_outline, "User: ${req.user}"),
+          _iconLine(Icons.location_on_outlined, "Location: ${req.address}"),
           const SizedBox(height: 10),
-          Text(desc, style: const TextStyle(fontSize: 14, color: Colors.black87)),
+          Text(req.description, style: const TextStyle(fontSize: 14, color: Colors.black87)),
           const SizedBox(height: 20),
-
           Row(
             children: [
-              Expanded(child: _btn("Reject", Colors.red)),
+              Expanded(child: _btn("Reject", Colors.red, () => handleAction(req, false))),
               const SizedBox(width: 12),
-              Expanded(child: _btn("Approve", Colors.green,)),
+              Expanded(child: _btn("Approve", Colors.green, () => handleAction(req, true))),
             ],
           ),
         ],
       ),
     );
   }
-
 
   Widget _iconLine(IconData icon, String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, size: 16, color: AppColors.lightPurple),
-          const SizedBox(width: 8),
-
-          Expanded(
-            child: Text(
-              text,
-              style: const TextStyle(color: Colors.blueGrey, fontSize: 13),
-              softWrap: true, 
-            ),
-          ),
-        ],
-      ),
+      child: Row(children: [
+        Icon(icon, size: 16, color: AppColors.lightPurple),
+        const SizedBox(width: 8),
+        Expanded(child: Text(text, style: const TextStyle(color: Colors.blueGrey, fontSize: 13))),
+      ]),
     );
   }
 
   Widget _buildBadge(String label) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: AppColors.lightPurple.withOpacity(0.03), borderRadius: BorderRadius.circular(10)),
-      child: Text(label, style: TextStyle(color: AppColors.lightPurple, fontWeight: FontWeight.bold, fontSize: 10)),
+      decoration: BoxDecoration(color: AppColors.lightPurple.withOpacity(0.05), borderRadius: BorderRadius.circular(10)),
+      child: Text(label, style: const TextStyle(color: AppColors.lightPurple, fontWeight: FontWeight.bold, fontSize: 10)),
     );
   }
 
-  Widget _btn(String label, Color col) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        color: col,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: col),
-      ),
-      child: Center(
-        child: Text(label, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+  Widget _btn(String label, Color col, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 40,
+        decoration: BoxDecoration(color: col, borderRadius: BorderRadius.circular(12)),
+        child: Center(child: Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
       ),
     );
   }
