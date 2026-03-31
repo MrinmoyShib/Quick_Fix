@@ -40,7 +40,7 @@ class _UserHomeState extends State<UserHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA), // Lighter background
+      backgroundColor: const Color(0xFFFAFAFA),
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class _UserHomeState extends State<UserHome> {
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
-          selectedItemColor: Colors.purple[800], // Changed to match theme
+          selectedItemColor: Colors.purple[800],
           unselectedItemColor: Colors.grey,
           selectedFontSize: 12,
           unselectedFontSize: 12,
@@ -71,15 +71,15 @@ class _UserHomeState extends State<UserHome> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // New Modern Gradient Header
+
           Container(
             width: double.infinity,
             padding: const EdgeInsets.only(top: 60, bottom: 30, left: 20, right: 20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.purple[900]!, // Starting deep purple
-                  Colors.purple[400]!, // Ending vibrant purple
+                  Colors.purple[900]!,
+                  Colors.purple[400]!,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -90,9 +90,9 @@ class _UserHomeState extends State<UserHome> {
               ),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // Align welcome text left
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center( // Keep brand center-aligned
+                const Center(
                   child: Column(
                     children: [
                       Text(
@@ -101,20 +101,20 @@ class _UserHomeState extends State<UserHome> {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        "Service Portal", // Changed from Admin Console to fit user context
+                        "Service Portal",
                         style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 1),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 30),
-                // Welcome message now integrated into header area
+
                 const Text(
                   "Welcome Back!",
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
                 Text(
-                  "User", // You might replace this with dynamic username
+                  "User",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ],
@@ -127,10 +127,10 @@ class _UserHomeState extends State<UserHome> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                // Heading remains above the cards
+
                 const Text(
                   "What needs fixing?",
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.purple), // Updated color
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.purple),
                 ),
                 const SizedBox(height: 30),
                 GridView.count(
@@ -188,7 +188,7 @@ class _UserHomeState extends State<UserHome> {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.purple[900] // Updated color
+                    color: Colors.purple[900]
                 )
             ),
           ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ReportForm extends StatefulWidget {
-  // We now require the category so the form knows what was picked
   final String initialCategory;
 
   const ReportForm({super.key, required this.initialCategory});
@@ -50,13 +49,13 @@ class _ReportFormState extends State<ReportForm> {
 
   @override
   Widget build(BuildContext context) {
-    // Theme color to match your new Admin-style home page
     final primaryColor = Colors.purple[800]!;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
-        title: const Text("New Request", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: const Text("New Request",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         backgroundColor: primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0,
@@ -69,13 +68,16 @@ class _ReportFormState extends State<ReportForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Displaying the selection as a non-editable "Info Tile"
                 Text("Selected Category",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.purple[900], fontSize: 16)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.purple[900],
+                        fontSize: 16)),
                 const SizedBox(height: 12),
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
                   decoration: BoxDecoration(
                     color: Colors.purple[50],
                     borderRadius: BorderRadius.circular(12),
@@ -96,22 +98,18 @@ class _ReportFormState extends State<ReportForm> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 30),
+
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Describe the Problem",
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.purple[900], fontSize: 16)),
-                    Text(
-                      "${_descriptionController.text.length}/10",
-                      style: TextStyle(
-                          color: _isButtonEnabled ? Colors.green : Colors.red,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.purple[900],
+                            fontSize: 16)),
+
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -132,14 +130,15 @@ class _ReportFormState extends State<ReportForm> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 30),
-
                 Text("Reference Photo (Optional)",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.purple[900], fontSize: 16)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.purple[900],
+                        fontSize: 16)),
                 const SizedBox(height: 12),
                 InkWell(
-                  onTap: () {}, // Image Picker logic would go here
+                  onTap: () {},
                   child: Container(
                     height: 140,
                     width: double.infinity,
@@ -151,16 +150,18 @@ class _ReportFormState extends State<ReportForm> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.camera_alt_outlined, size: 40, color: primaryColor),
+                        Icon(Icons.camera_alt_outlined,
+                            size: 40, color: primaryColor),
                         const SizedBox(height: 8),
-                        Text("Tap to upload image", style: TextStyle(color: primaryColor, fontWeight: FontWeight.w500)),
+                        Text("Tap to upload image",
+                            style: TextStyle(
+                                color: primaryColor,
+                                fontWeight: FontWeight.w500)),
                       ],
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 40),
-
                 SizedBox(
                   width: double.infinity,
                   height: 55,
@@ -169,18 +170,19 @@ class _ReportFormState extends State<ReportForm> {
                       backgroundColor: primaryColor,
                       disabledBackgroundColor: Colors.grey[300],
                       foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
                       elevation: _isButtonEnabled ? 4 : 0,
                     ),
                     onPressed: _isButtonEnabled ? _handleSubmission : null,
-                    child: const Text("Submit Request", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    child: const Text("Submit Request",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
             ),
           ),
-
-          // Success Overlay
           if (_showSuccess)
             Positioned.fill(
               child: Container(
@@ -189,12 +191,17 @@ class _ReportFormState extends State<ReportForm> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.check_circle_outline, size: 100, color: Colors.green),
+                      const Icon(Icons.check_circle_outline,
+                          size: 100, color: Colors.green),
                       const SizedBox(height: 20),
                       Text("Request Sent!",
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.purple[900])),
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.purple[900])),
                       const SizedBox(height: 8),
-                      const Text("We're on it. Check 'History' for updates.", style: TextStyle(color: Colors.grey)),
+                      const Text("We're on it. Check 'History' for updates.",
+                          style: TextStyle(color: Colors.grey)),
                     ],
                   ),
                 ),
