@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "736426823074",
+    "project_id": "quick-fix-e8067",
+    "storage_bucket": "quick-fix-e8067.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736426823074:android:1a3707e53a88edd7a5f6fb",
+        "android_client_info": {
+          "package_name": "com.example.quick_fix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ2w_ouX51yYg9MHUJCOziYSyZKQPtmuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

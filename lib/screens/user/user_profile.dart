@@ -1,21 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../splash_screen/splash_screen.dart';
+
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
+    signOut() async {
+      await FirebaseAuth.instance.signOut();
+    }
+
     return Column(
       children: [
-        // --- 1. THE PROFILE HEADER CARD ---
+
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.blue[800]!, Colors.blue[600]!],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.purple[900]!, Colors.purple[600]!],
             ),
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(30),
@@ -23,47 +30,48 @@ class UserProfile extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withOpacity(0.3),
+                color: Colors.purple.withOpacity(0.3),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               )
             ],
           ),
-          padding: const EdgeInsets.only(top: 50, bottom: 30),
+          padding: const EdgeInsets.only(top: 60, bottom: 30),
           child: Column(
             children: [
               const CircleAvatar(
                 radius: 55,
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.white24,
                 child: CircleAvatar(
                   radius: 50,
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.person, size: 55, color: Colors.white),
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.person, size: 55, color: Colors.purple),
                 ),
               ),
               const SizedBox(height: 15),
-              const Text(
-                "Shirsha",
-                style: TextStyle(
+              Text(
+                user?.displayName ?? "Shirsha",
+                style: const TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: Colors.white
                 ),
               ),
-              const Text(
-                "shirsha@student.com",
-                style: TextStyle(color: Colors.white70, fontSize: 16),
+              Text(
+                user?.email ?? "shirsha@student.com",
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
 
               const SizedBox(height: 25),
 
-              // --- 2. THE STATISTICS ROW (Matched to your Request History) ---
+
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 30),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: Colors.white10),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,19 +92,37 @@ class UserProfile extends StatelessWidget {
 
         const SizedBox(height: 20),
 
-        // --- 3. PROFILE OPTIONS LIST ---
+
         Expanded(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             children: [
-              _profileOption(Icons.settings, "Account Settings", Colors.orange),
-              _profileOption(Icons.notifications, "Notifications", Colors.blue),
-              _profileOption(Icons.help_outline, "Help & Support", Colors.green),
-              _profileOption(Icons.security, "Privacy Policy", Colors.purple),
+              _profileOption(context, Icons.settings, "Account Settings", Colors.orange, null),
+              _profileOption(context, Icons.notifications, "Notifications", Colors.blue, null),
+
+              // Added random help content
+              _profileOption(context, Icons.help_outline, "Help & Support", Colors.green, () {
+                _showInfoSheet(context, "Help & Support", [
+                  "• How to report: Select a category from the home screen.",
+                  "• Response time: Maintenance usually responds within 24 hours.",
+                  "• Emergency: Call the campus helpline for urgent leaks.",
+                  "• App Version: v1.0.4 (Quick-Fix Beta)"
+                ]);
+              }),
+
+
+              _profileOption(context, Icons.security, "Privacy Policy", Colors.purple, () {
+                _showInfoSheet(context, "Privacy Policy", [
+                  "• We collect image data for repair validation only.",
+                  "• Your location is used to identify the dorm wing.",
+                  "• Data is deleted 30 days after the issue is marked 'Fixed'.",
+                  "• We do not share data with third-party advertisers."
+                ]);
+              }),
 
               const SizedBox(height: 30),
 
-              // Logout Button
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: OutlinedButton.icon(
@@ -108,13 +134,8 @@ class UserProfile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12)
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SplashScreen()),
-                          (route) => false,
-                    );
-                  },
+                  onPressed: () => signOut(),
+
                   icon: const Icon(Icons.logout),
                   label: const Text(
                       "Logout",
@@ -130,38 +151,25 @@ class UserProfile extends StatelessWidget {
     );
   }
 
-  // Helper for Statistic Items
   Widget _statItem(String label, String value) {
     return Column(
       children: [
-        Text(
-          value,
-          style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold
-          ),
-        ),
-        Text(
-          label,
-          style: const TextStyle(color: Colors.white70, fontSize: 11),
-        ),
+        Text(value, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(label, style: const TextStyle(color: Colors.white70, fontSize: 11)),
       ],
     );
   }
 
-  // Vertical Divider for Stats
   Widget _divider() {
     return Container(height: 30, width: 1, color: Colors.white24);
   }
 
-  // Refined Profile Option Helper
-  Widget _profileOption(IconData icon, String title, Color color) {
+  Widget _profileOption(BuildContext context, IconData icon, String title, Color color, VoidCallback? onTap) {
     return Card(
       elevation: 0,
       margin: const EdgeInsets.symmetric(vertical: 5),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      color: Colors.grey[50],
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: Colors.grey[200]!)),
+      color: Colors.white,
       child: ListTile(
         leading: Container(
           padding: const EdgeInsets.all(8),
@@ -171,12 +179,39 @@ class UserProfile extends StatelessWidget {
           ),
           child: Icon(icon, color: color, size: 22),
         ),
-        title: Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)
-        ),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
         trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
-        onTap: () {},
+        onTap: onTap ?? () {},
+      ),
+    );
+  }
+
+  // A clean bottom sheet to show the "random stuff" for Help/Privacy
+  void _showInfoSheet(BuildContext context, String title, List<String> points) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.purple[900])),
+            const SizedBox(height: 15),
+            ...points.map((p) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Text(p, style: const TextStyle(fontSize: 15, color: Colors.black87)),
+            )),
+            const SizedBox(height: 20),
+            Center(
+              child: TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Got it"),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -5,6 +5,8 @@ class MyRequests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Colors.purple[800]!;
+
     final List<Map<String, String>> dummyRequests = [
       {"id": "001", "category": "Electric", "status": "Pending", "date": "Oct 24, 2025", "desc": "Light flickering in Room 202"},
       {"id": "002", "category": "Plumbing", "status": "In Progress", "date": "Oct 22, 2025", "desc": "Leaky tap in the bathroom"},
@@ -12,44 +14,61 @@ class MyRequests extends StatelessWidget {
     ];
 
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       itemCount: dummyRequests.length,
       itemBuilder: (context, index) {
         final item = dummyRequests[index];
         return Container(
-          margin: const EdgeInsets.only(bottom: 15),
+          margin: const EdgeInsets.only(bottom: 16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: Colors.black.withOpacity(0.04),
                   blurRadius: 10,
-                  spreadRadius: 2
+                  offset: const Offset(0, 4)
               )
             ],
+            border: Border.all(color: Colors.grey[100]!),
           ),
-          // 1. Material widget allows the ink splash and hover color to appear correctly
           child: Material(
-            color: Colors.transparent, // Keeps the Container's white background
+            color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.circular(15), // Matches Container shape
-              onTap: () => _showStatusTimeline(context, item),
-              // 2. Explicitly setting hover color for a nice blue tint on PC
-              hoverColor: Colors.blue[50],
-              child: ListTile(
-                // Important: remove the internal onTap so InkWell handles it for better hovering
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                leading: CircleAvatar(
-                  backgroundColor: Colors.blue[50],
-                  child: Icon(_getCategoryIcon(item['category']!), color: Colors.blue[800]),
+              borderRadius: BorderRadius.circular(15),
+              onTap: () => _showStatusTimeline(context, item, primaryColor),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    // Icon Circle
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: primaryColor.withOpacity(0.1),
+                      child: Icon(_getCategoryIcon(item['category']!), color: primaryColor, size: 28),
+                    ),
+                    const SizedBox(width: 16),
+                    // Text Details
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              "${item['category']} Issue",
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.purple[900])
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            "ID: #${item['id']} • ${item['date']}",
+                            style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Status Badge
+                    _buildStatusBadge(item['status']!),
+                  ],
                 ),
-                title: Text(
-                    "${item['category']} Issue",
-                    style: const TextStyle(fontWeight: FontWeight.bold)
-                ),
-                subtitle: Text("ID: #${item['id']} • ${item['date']}"),
-                trailing: _buildStatusBadge(item['status']!),
               ),
             ),
           ),
@@ -58,36 +77,48 @@ class MyRequests extends StatelessWidget {
     );
   }
 
-  // --- THE TIMELINE BOTTOM SHEET ---
-  void _showStatusTimeline(BuildContext context, Map<String, String> item) {
+  void _showStatusTimeline(BuildContext context, Map<String, String> item, Color primaryColor) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(25))
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30))
       ),
       builder: (context) {
+        bool isPending = item['status'] == 'Pending';
+        bool isInProgress = item['status'] == 'In Progress';
+        bool isFixed = item['status'] == 'Fixed';
+
         return Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.fromLTRB(30, 20, 30, 40),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                  "Ticket #${item['id']} Status",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue[900]
-                  )
+              Center(
+                child: Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10))),
               ),
-              const SizedBox(height: 5),
-              Text(item['desc']!, style: const TextStyle(color: Colors.grey)),
               const SizedBox(height: 25),
+              Text(
+                  "Ticket Status",
+                  style: TextStyle(fontSize: 14, color: Colors.purple[300], fontWeight: FontWeight.bold, letterSpacing: 1)
+              ),
+              Text(
+                  "Ref: #${item['id']}",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.purple[900])
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(10)),
+                child: Text(item['desc']!, style: TextStyle(color: Colors.grey[700], fontStyle: FontStyle.italic)),
+              ),
+              const SizedBox(height: 30),
 
-              _timelineStep("Reported", item['date']!, true),
-              _timelineStep("Technician Assigned", "Pending Assignment", item['status'] != 'Pending'),
-              _timelineStep("Work in Progress", "Waiting to start", item['status'] == 'In Progress' || item['status'] == 'Fixed'),
-              _timelineStep("Resolved", "Final Check", item['status'] == 'Fixed'),
+              _timelineStep("Reported Successfully", item['date']!, true, primaryColor),
+              _timelineStep("Technician Assigned", isPending ? "Waiting for staff..." : "Staff member: John Doe", !isPending, primaryColor),
+              _timelineStep("Repair in Progress", isInProgress || isFixed ? "Technician is on site" : "Queued", isFixed || isInProgress, primaryColor),
+              _timelineStep("Resolved & Closed", isFixed ? "Issue fixed by technician" : "Pending final check", isFixed, primaryColor),
             ],
           ),
         );
@@ -95,61 +126,74 @@ class MyRequests extends StatelessWidget {
     );
   }
 
-  Widget _timelineStep(String title, String subtitle, bool isDone) {
-    return Row(
-      children: [
-        Column(
-          children: [
-            Icon(
-                isDone ? Icons.check_circle : Icons.radio_button_unchecked,
-                color: isDone ? Colors.blue : Colors.grey
+  Widget _timelineStep(String title, String subtitle, bool isDone, Color activeColor) {
+    return IntrinsicHeight(
+      child: Row(
+        children: [
+          Column(
+            children: [
+              Icon(
+                  isDone ? Icons.check_circle : Icons.circle_outlined,
+                  color: isDone ? activeColor : Colors.grey[300],
+                  size: 24
+              ),
+              Expanded(
+                child: Container(width: 2, color: Colors.grey[200]),
+              ),
+            ],
+          ),
+          const SizedBox(width: 15),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                    title,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: isDone ? Colors.black87 : Colors.grey[400]
+                    )
+                ),
+                Text(subtitle, style: TextStyle(fontSize: 12, color: isDone ? Colors.grey[600] : Colors.grey[400])),
+              ],
             ),
-            Container(width: 2, height: 30, color: Colors.grey[300]),
-          ],
-        ),
-        const SizedBox(width: 15),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-                title,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: isDone ? Colors.black : Colors.grey
-                )
-            ),
-            Text(subtitle, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
-            const SizedBox(height: 20),
-          ],
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 
   IconData _getCategoryIcon(String category) {
     switch (category) {
-      case 'Electric': return Icons.flash_on;
-      case 'Plumbing': return Icons.water_drop;
-      case 'Furniture': return Icons.chair;
-      default: return Icons.build;
+      case 'Electric': return Icons.bolt_rounded;
+      case 'Plumbing': return Icons.water_drop_rounded;
+      case 'Furniture': return Icons.chair_alt_rounded;
+      default: return Icons.construction_rounded;
     }
   }
 
   Widget _buildStatusBadge(String status) {
-    Color color = status == 'Fixed'
-        ? Colors.green
-        : (status == 'In Progress' ? Colors.orange : Colors.red);
+    Color color;
+    switch(status) {
+      case 'Fixed': color = Colors.green[600]!; break;
+      case 'In Progress': color = Colors.orange[700]!; break;
+      default: color = Colors.red[400]!;
+    }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: color.withOpacity(0.5)),
+          color: color,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(color: color.withOpacity(0.3), blurRadius: 4, offset: const Offset(0, 2))
+          ]
       ),
       child: Text(
           status,
-          style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 11)
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)
       ),
     );
   }
