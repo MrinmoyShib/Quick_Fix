@@ -25,7 +25,7 @@ build/
 bin/cache/
 
 # Generated files that should stay local
-**/generated_plugin_registrant.dart
+**/generated_plugin_registrant.*
 **/generated_plugins.cmake
 
 # -----------------------------------------------------------------------------
@@ -79,3 +79,5 @@ bin/cache/
 coverage/
 app.*.symbols
 app.*.map.json
+
+lib/firebase_options.dart

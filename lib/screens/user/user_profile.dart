@@ -1,11 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../splash_screen/splash_screen.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
+    signOut() async {
+      await FirebaseAuth.instance.signOut();
+    }
+
     return Column(
       children: [
         // --- 1. THE PROFILE HEADER CARD ---
@@ -42,22 +48,22 @@ class UserProfile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              const Text(
-                "Shirsha",
-                style: TextStyle(
+              Text(
+                user?.displayName ?? "Shirsha",
+                style: const TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: Colors.white
                 ),
               ),
-              const Text(
-                "shirsha@student.com",
-                style: TextStyle(color: Colors.white70, fontSize: 16),
+              Text(
+                user?.email ?? "shirsha@student.com",
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
 
               const SizedBox(height: 25),
 
-              // --- 2. THE STATISTICS ROW (Matched to your Request History) ---
+              // --- 2. THE STATISTICS ROW ---
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 30),
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -108,13 +114,7 @@ class UserProfile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12)
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SplashScreen()),
-                          (route) => false,
-                    );
-                  },
+                  onPressed: () => signOut(),
                   icon: const Icon(Icons.logout),
                   label: const Text(
                       "Logout",
