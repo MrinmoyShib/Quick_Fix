@@ -23,9 +23,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
@@ -55,24 +61,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '736426823074',
     projectId: 'quick-fix-e8067',
     storageBucket: 'quick-fix-e8067.firebasestorage.app',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCzO1ZHmRv58GXecjiqXKdwZ8EqUjhVPy4',
-    appId: '1:736426823074:ios:1797c6cbaff25e45a5f6fb',
-    messagingSenderId: '736426823074',
-    projectId: 'quick-fix-e8067',
-    storageBucket: 'quick-fix-e8067.firebasestorage.app',
-    iosBundleId: 'com.example.quickFix',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCzO1ZHmRv58GXecjiqXKdwZ8EqUjhVPy4',
-    appId: '1:736426823074:ios:1797c6cbaff25e45a5f6fb',
-    messagingSenderId: '736426823074',
-    projectId: 'quick-fix-e8067',
-    storageBucket: 'quick-fix-e8067.firebasestorage.app',
-    iosBundleId: 'com.example.quickFix',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
