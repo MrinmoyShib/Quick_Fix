@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Spacer(flex: 2),
               Image.asset(
                 'assets/images/logo.png',
-                width: 100,
+                width: 250,
               ),
               const SizedBox(height: 30),
               TextFormField(
