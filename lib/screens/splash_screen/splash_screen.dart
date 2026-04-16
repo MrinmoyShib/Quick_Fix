@@ -52,19 +52,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   width: 200,
                 ),
               ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(right: 2.0),
-                child: const Text(
-                  "Quick-Fix",
-                  style: TextStyle(
-                    color: Colors.purple,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2.0,
-                  ),
-                ),
-              ),
             ],
           ),
         ),
