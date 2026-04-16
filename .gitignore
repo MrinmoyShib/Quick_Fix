@@ -81,3 +81,15 @@ app.*.symbols
 app.*.map.json
 
 lib/firebase_options.dart
+
+# Flutter/Dart generated files
+**/generated_plugin_registrant.cc
+**/generated_plugin_registrant.h
+**/generated_plugin_registrant.dart
+**/generated_plugin_registrant.swift
+
+# Windows/Linux Desktop specific generated files
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+**/linux/flutter/generated_plugin_registrant.cc
+**/linux/flutter/generated_plugin_registrant.h
