@@ -12,96 +12,61 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Form(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              TextFormField(
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Email",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.email,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Password",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: Colors.blue,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.deepPurple),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildTextField("Email", Icons.email),
+            const SizedBox(height: 20),
+            _buildTextField("Password", Icons.lock, obscure: true),
+            const SizedBox(height: 20),
+            _buildTextField("Confirm Password", Icons.lock, obscure: true),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 45,
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Confirm Password",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: Colors.blue,
-                  ),
+                child: const Text(
+                  "Change Password",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
+                onPressed: () {},
               ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 40,
-                width: double.infinity,
-
-                child: ElevatedButton(
-
-                  child: const Text(
-                    "Change Password",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(String hint, IconData icon, {bool obscure = false}) {
+    return TextFormField(
+      obscureText: obscure,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.grey),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.deepPurple),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        hintText: hint,
+        hintStyle: const TextStyle(color: Colors.grey),
+        prefixIcon: Icon(icon, color: Colors.deepPurple),
       ),
     );
   }

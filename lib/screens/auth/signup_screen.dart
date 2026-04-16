@@ -12,126 +12,41 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Form(
-        child: Padding(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.deepPurple),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
-              TextFormField(
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Email",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.email,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
+              _buildTextField("Email", Icons.email),
               const SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Username",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.person,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
+              _buildTextField("Username", Icons.person),
               const SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Mobile Number",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.phone,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
+              _buildTextField("Mobile Number", Icons.phone),
               const SizedBox(height: 20),
-
-
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Password",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
+              _buildTextField("Password", Icons.lock, obscure: true),
               const SizedBox(height: 20),
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  hintText: "Confirm Password",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
+              _buildTextField("Confirm Password", Icons.lock, obscure: true),
               const SizedBox(height: 20),
               SizedBox(
-                height: 35,
+                height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   onPressed: () {},
                 ),
@@ -139,6 +54,25 @@ class _SignupScreenState extends State<SignupScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(String hint, IconData icon, {bool obscure = false}) {
+    return TextFormField(
+      obscureText: obscure,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.grey),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.deepPurple),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        hintText: hint,
+        hintStyle: const TextStyle(color: Colors.grey),
+        prefixIcon: Icon(icon, color: Colors.deepPurple),
       ),
     );
   }

@@ -31,10 +31,16 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(builder: (context) => const AdminDashboard()),
       );
     } else {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email.text,
-        password: password.text,
-      );
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email.text,
+          password: password.text,
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
     }
   }
 
@@ -61,12 +67,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: Colors.deepPurple),
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
                   hintText: "Email/Username",
                   hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(Icons.email, color: Colors.blue),
+                  prefixIcon: Icon(Icons.email, color: Colors.deepPurple),
                 ),
               ),
               const SizedBox(height: 20),
@@ -79,34 +85,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: Colors.deepPurple),
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                   ),
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(Icons.lock, color: Colors.blue),
+                  prefixIcon: Icon(Icons.lock, color: Colors.deepPurple),
                 ),
               ),
               const SizedBox(height: 20),
               SizedBox(
-                height: 40,
+                height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    side: const BorderSide(
-                      color: Colors.blueAccent,
-                      width: 2,
-                    ),
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.deepPurple,
                     foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   onPressed: signIn,
                   child: const Text(
                     "Log in",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -126,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Text(
                   "Forgot Password",
                   style: TextStyle(
-                    color: _isHovering ? Colors.blue : Colors.grey,
+                    color: _isHovering ? Colors.deepPurple : Colors.grey,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -139,21 +141,19 @@ class _LoginScreenState extends State<LoginScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SizedBox(
-          height: 40,
+          height: 45,
           width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              side: const BorderSide(
-                color: Colors.grey,
-                width: 2,
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(color: Colors.deepPurple, width: 1.5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.blue,
             ),
             child: const Text(
               "Sign Up",
               style: TextStyle(
-                color: Colors.grey,
+                color: Colors.deepPurple,
                 fontWeight: FontWeight.bold,
               ),
             ),
