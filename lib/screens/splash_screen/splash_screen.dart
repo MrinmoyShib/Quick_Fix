@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: const Text(
                   "Quick-Fix",
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Colors.purple,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2.0,
